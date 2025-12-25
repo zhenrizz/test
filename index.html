@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Samira ❤️</title>
+    <style>
+        :root {
+            --color-primary: #E63946;
+            --color-secondary: #457B9D;
+            --color-accent: #F1FAEE;
+            --color-background: #FFFFFF;
+            --color-text: #1D3557;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #F1FAEE 0%, #FFFFFF 100%);
+            color: var(--color-text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); }
+            50% { transform: translateY(-20vh) rotate(180deg); }
+        }
+
+        .decoration-grid {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .decoration-grid.top-right {
+            top: -100px;
+            right: -100px;
+            transform: rotate(15deg);
+        }
+
+        .decoration-grid.bottom-left {
+            bottom: -100px;
+            left: -100px;
+            transform: rotate(-15deg);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            animation: fadeInUp 1s ease;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c9303d 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(230, 57, 70, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease;
+            position: relative;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin: 30px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .phrase-display {
+            background: linear-gradient(135deg, #F1FAEE 0%, #FFFFFF 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 5px solid var(--color-primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .phrase-display p {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-primary);
+            line-height: 1.6;
+        }
+
+        /* Added gallery section styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .gallery-caption h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .gallery-caption p {
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin: 30px 0;
+        }
+
+        .game-score {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .game-area {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #F1FAEE 0%, #FFFFFF 100%);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid var(--color-accent);
+        }
+
+        .heart-target {
+            position: absolute;
+            font-size: 35px;
+            cursor: pointer;
+            animation: heartPulse 1s infinite;
+            transition: transform 0.2s ease;
+        }
+
+        .heart-target:hover {
+            transform: scale(1.3);
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .game-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            min-height: 30px;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .music-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c9303d 100%);
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .secret-input-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .secret-input {
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 2px solid var(--color-accent);
+            border-radius: 50px;
+            width: 300px;
+            max-width: 90%;
+            text-align: center;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+
+        .secret-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1);
+        }
+
+        .secret-area {
+            background: linear-gradient(135deg, #ffeef0 0%, #FFFFFF 100%);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .container { padding: 40px 20px; }
+            .card { padding: 25px; }
+            button { padding: 14px 30px; font-size: 1rem; }
+            .music-player { bottom: 20px; right: 20px; padding: 12px 20px; }
+            .gallery-item img { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Password Screen -->
+    <div id="screenPassword" class="screen active">
+        <div class="decoration-grid top-right"></div>
+        <div class="container">
+            <h1>Entrada Secreta 💕</h1>
+            <p>Digite a palavra secreta para entrar</p>
+            <div class="secret-input-container">
+                <input type="text" id="passwordInput" class="secret-input" placeholder="Palavra secreta...">
+                <br>
+                <button onclick="checkPassword()">Entrar</button>
+            </div>
+            <p id="passwordError" style="color: var(--color-primary); font-weight: 600;"></p>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="screen1" class="screen">
+        <div class="decoration-grid top-right"></div>
+        <div class="container">
+            <h1>Oi, Samira ❤️</h1>
+            <p>Preparei algo especial para você. Uma pequena jornada pelos meus sentimentos, pelas razões que fazem você ser tão importante na minha vida.</p>
+            <button onclick="startJourney()">Começar a Jornada</button>
+        </div>
+    </div>
+
+    <!-- Gallery Screen -->
+    <div id="screen2" class="screen">
+        <div class="container">
+            <h2>Você é perfeita</h2>
+            <p>Cada foto sua é um lembrete de quão sortudo eu sou por ter você na minha vida</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/CSjXUFj.jpeg" alt="Samira 1">
+                    <div class="gallery-caption">
+                        <h3>Seu Sorriso</h3>
+                        <p>Seu sorriso ilumina meus dias e aquece meu coração de uma forma que palavras não conseguem descrever</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/1Pxf0bn.jpeg" alt="Samira 2">
+                    <div class="gallery-caption">
+                        <h3>Sua Beleza</h3>
+                        <p>Você é linda de todas as formas possíveis, por dentro e por fora, e cada dia me apaixono mais</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/YMHN2XL.jpeg" alt="Samira 3">
+                    <div class="gallery-caption">
+                        <h3>Sua Essência</h3>
+                        <p>Sua personalidade única, seu jeito de ser, tudo em você me faz querer estar ao seu lado para sempre</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="nextScreen(3)">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Phrases Screen -->
+    <div id="screen3" class="screen">
+        <div class="container">
+            <h2>Por que eu te amo</h2>
+            <p>Cada um desses motivos é uma pequena parte do quanto você significa para mim.</p>
+            <div class="phrase-display" id="phraseDisplay">
+                <p>Clique no botão abaixo para descobrir</p>
+            </div>
+            <button onclick="showRandomPhrase()">Mostrar um motivo ❤️</button>
+            <br><br>
+            <button onclick="nextScreen(4)">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Mini Game Screen -->
+    <div id="screen4" class="screen">
+        <div class="decoration-grid bottom-left"></div>
+        <div class="container">
+            <h2>Jogo do Amor 💕</h2>
+            <p>Colete os corações e descubra mais motivos para eu te amar!</p>
+            <div class="game-container">
+                <div class="game-score" id="gameScore">Corações coletados: 0/10</div>
+                <div class="game-area" id="gameArea"></div>
+                <div class="game-message" id="gameMessage"></div>
+            </div>
+            <button onclick="nextScreen(5)">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Letter Screen -->
+    <div id="screen5" class="screen">
+        <div class="container">
+            <h2>Uma carta para você</h2>
+            <div class="card">
+                <p style="text-align: left; margin-bottom: 20px;">Samira,</p>
+                <p style="text-align: left; margin-bottom: 20px;">
+                    Cada dia ao seu lado é um presente que eu não sabia que precisava. Você trouxe luz para lugares que eu nem sabia que estavam escuros. Seu sorriso tem o poder de transformar qualquer dia ruim em algo especial.
+                </p>
+                <p style="text-align: left; margin-bottom: 20px;">
+                    Amo como você é genuína, como você se importa, como você é exatamente quem você é sem fingir ser outra pessoa. Amo suas imperfeições porque elas fazem parte de quem você realmente é.
+                </p>
+                <p style="text-align: left; margin-bottom: 0;">
+                    Obrigado por existir, por estar na minha vida, por me fazer querer ser uma pessoa melhor todos os dias.
+                </p>
+            </div>
+            <button onclick="nextScreen(6)">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Final Screen -->
+    <div id="screen6" class="screen">
+        <div class="container">
+            <h1>Te amo, Samira</h1>
+            <p>Hoje, amanhã e sempre. Você é a pessoa que eu escolhi para dividir minha vida, meus sonhos e meus momentos. Obrigado por ser exatamente quem você é.</p>
+            <p style="font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: var(--color-primary);">Para sempre seu ❤️</p>
+            <button onclick="location.reload()">Recomeçar a Jornada</button>
+        </div>
+    </div>
+
+    <!-- Secret Screen -->
+    <div id="screenSecret" class="screen secret-area">
+        <div class="container">
+            <h1>Bem-vinda, minha sebosa ❤️</h1>
+            <div class="card">
+                <p style="font-family: var(--font-display); font-size: 1.8rem; font-style: italic; margin-bottom: 25px;">
+                    "Sebosa é aquele apelido que só eu posso te chamar"
+                </p>
+                <p style="text-align: left; margin-bottom: 20px;">
+                    Esse é o nosso cantinho secreto! Um lugar só nosso, onde posso te chamar de sebosa sem vergonha. É uma brincadeira íntima, que mostra o quanto eu amo cada pedacinho de você.
+                </p>
+                <p id="maldosaText" onclick="easterEggClick()" style="cursor: pointer; font-family: var(--font-display); font-size: 1.5rem; color: var(--color-primary); font-style: italic; margin: 30px 0;">
+                    Você é maldosa… mas é a minha maldosa 😈
+                </p>
+                <p style="font-size: 1.1rem; margin-top: 20px;">
+                    Maldosa no jeito, perfeita no coração 💖
+                </p>
+            </div>
+            <button onclick="nextScreen(6)">Continuar a Jornada</button>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-toggle" onclick="toggleMusic()" id="musicToggle">
+            ▶️
+        </button>
+        <span style="font-size: 0.9rem; color: var(--color-text);">Música</span>
+    </div>
+    <audio id="backgroundMusic" loop>
+        <!-- Note: Google Drive links don't work directly. User needs to download and host the MP3 -->
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Floating hearts animation
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        createFloatingHearts();
+
+        // Password check
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value.toLowerCase().trim();
+            const error = document.getElementById('passwordError');
+            
+            if (input === 'sebosa') {
+                nextScreen(1);
+                error.textContent = '';
+            } else {
+                error.textContent = '❌ Palavra incorreta. Tente novamente!';
+            }
+        }
+
+        // Allow Enter key to submit password
+        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Navigation
+        function nextScreen(screenNumber) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(s => s.classList.remove('active'));
+            
+            if (screenNumber === 'secret') {
+                document.getElementById('screenSecret').classList.add('active');
+            } else {
+                document.getElementById('screen' + screenNumber).classList.add('active');
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function startJourney() {
+            nextScreen(2);
+        }
+
+        // Love phrases
+        const phrases = [
+            "Amo quando você sorri e ilumina todo o ambiente",
+            "Amo a forma como você se importa com as pessoas ao seu redor",
+            "Amo seus olhos e como eles brilham quando você está feliz",
+            "Amo como você é forte mesmo nos momentos difíceis",
+            "Amo sua risada, ela é contagiante e me faz feliz instantaneamente",
+            "Amo como você me entende sem eu precisar explicar",
+            "Amo seu jeito único de ver o mundo",
+            "Amo como você me faz querer ser uma pessoa melhor",
+            "Amo sua sinceridade e honestidade",
+            "Amo como você me faz sentir em casa, não importa onde estejamos",
+            "Amo seus pequenos gestos de carinho que fazem meu dia melhor",
+            "Amo como você é corajosa para enfrentar seus medos",
+            "Amo sua determinação em alcançar seus objetivos",
+            "Amo como você cuida de mim quando preciso",
+            "Amo simplesmente estar ao seu lado, em silêncio ou conversando"
+        ];
+
+        let usedPhrases = [];
+
+        function showRandomPhrase() {
+            if (usedPhrases.length === phrases.length) {
+                usedPhrases = [];
+            }
+            
+            let availablePhrases = phrases.filter((_, index) => !usedPhrases.includes(index));
+            let randomIndex = Math.floor(Math.random() * availablePhrases.length);
+            let phrase = availablePhrases[randomIndex];
+            let originalIndex = phrases.indexOf(phrase);
+            
+            usedPhrases.push(originalIndex);
+            
+            const display = document.getElementById('phraseDisplay');
+            display.innerHTML = '<p>' + phrase + '</p>';
+        }
+
+        // Mini game
+        let score = 0;
+        let gameActive = false;
+
+        function startGame() {
+            if (gameActive) return;
+            gameActive = true;
+            score = 0;
+            updateScore();
+            document.getElementById('gameMessage').textContent = '';
+            spawnHeart();
+        }
+
+        function spawnHeart() {
+            if (!gameActive) return;
+            
+            const gameArea = document.getElementById('gameArea');
+            const heart = document.createElement('div');
+            heart.className = 'heart-target';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+            heart.style.top = Math.random() * (gameArea.offsetHeight - 50) + 'px';
+            
+            heart.onclick = function() {
+                score++;
+                updateScore();
+                heart.remove();
+                
+                if (score < 10) {
+                    setTimeout(spawnHeart, 500);
+                } else {
+                    endGame();
+                }
+            };
+            
+            gameArea.appendChild(heart);
+            
+            setTimeout(() => {
+                if (heart.parentNode && gameActive) {
+                    heart.remove();
+                    if (score < 10) spawnHeart();
+                }
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('gameScore').textContent = 'Corações coletados: ' + score + '/10';
+        }
+
+        function endGame() {
+            gameActive = false;
+            document.getElementById('gameMessage').textContent = '🎉 Parabéns! Você coletou todos os corações, assim como conquistou o meu!';
+            document.getElementById('gameArea').innerHTML = '';
+        }
+
+        document.getElementById('gameArea')?.addEventListener('click', function(e) {
+            if (e.target === this && !gameActive) {
+                startGame();
+            }
+        });
+
+        // Music player
+        const music = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicToggle.textContent = '▶️';
+            } else {
+                music.play().catch(e => {
+                    console.log('Autoplay prevented:', e);
+                });
+                musicToggle.textContent = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Easter egg
+        let clickCount = 0;
+        function easterEggClick() {
+            clickCount++;
+            if (clickCount >= 5) {
+                document.getElementById('maldosaText').innerHTML = 
+                    'Você é maldosa… mas é a minha maldosa favorita no mundo inteiro! 😈💖✨';
+                setTimeout(() => {
+                    document.getElementById('maldosaText').innerHTML = 
+                        'Você é maldosa… mas é a minha maldosa 😈';
+                    clickCount = 0;
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
